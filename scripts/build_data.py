@@ -232,6 +232,17 @@ def main() -> int:
     payload = dict(data)
     payload["derived"] = derived
 
+    # Image attribution, if scripts/fetch_media.py has been run. Generated from
+    # the Commons licence metadata, so on-page credits can never drift from it.
+    credits_path = ROOT / "assets" / "img" / "credits.json"
+    if credits_path.exists():
+        with credits_path.open(encoding="utf-8") as fh:
+            payload["credits"] = json.load(fh)
+        print(f"  ok  bundled {len(payload['credits'])} image credits")
+    else:
+        payload["credits"] = []
+        print("  --  no image credits found (run scripts/fetch_media.py)")
+
     OUT_JS.parent.mkdir(parents=True, exist_ok=True)
     with OUT_JS.open("w", encoding="utf-8") as fh:
         fh.write("// GENERATED FILE — do not edit.\n")

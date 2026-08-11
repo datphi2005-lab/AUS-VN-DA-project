@@ -1068,5 +1068,84 @@ window.AVDATA = {
     "eees_progress_pct": 45.3,
     "eees_shortfall": 2449.0,
     "ledger_ratio": 2.06
-  }
+  },
+  "credits": [
+    {
+      "slug": "flag-vietnam",
+      "file": "flag-vietnam.svg",
+      "role": "Flag of Vietnam",
+      "title": "File:Flag of Vietnam.svg",
+      "licence": "Public domain",
+      "licence_code": "pd",
+      "author": "See File history below for details.",
+      "description": "Flag of Vietnam",
+      "page": "https://commons.wikimedia.org/wiki/File%3AFlag_of_Vietnam.svg"
+    },
+    {
+      "slug": "flag-australia",
+      "file": "flag-australia.svg",
+      "role": "Flag of Australia",
+      "title": "File:Flag of Australia.svg",
+      "licence": "Public domain",
+      "licence_code": "pd",
+      "author": "Original: Ivor Evans, Leslie John Hawkins, Egbert John Nuttall, Annie Dorrington and William Stevens Vector: Ian Fieggen",
+      "description": "The flag of Australia.",
+      "page": "https://commons.wikimedia.org/wiki/File%3AFlag_of_Australia.svg"
+    },
+    {
+      "slug": "meeting-fm-2024",
+      "file": "meeting-fm-2024.jpg",
+      "role": "Hero — the bilateral relationship",
+      "title": "File:Australia-Vietnam Foreign Minister's Meeting - 2024 - 000172763.jpg",
+      "licence": "CC BY 4.0",
+      "licence_code": "cc-by-4.0",
+      "author": "Sarah Hodges / DFAT",
+      "description": "Senator the Hon Penny Wong, Minister for Foreign Affairs, hosts Deputy Prime Minister and Minister of Foreign Affairs of Vietnam, His Excellency Bui Thanh Son, at the sixth annual Australia-Vietnam Foreign Ministers’ Meeting to advance cooperation under our Comprehensive Strategic Partnership and address key regional challenges in Adelaide on Friday 18 October 2024.",
+      "page": "https://commons.wikimedia.org/wiki/File%3AAustralia-Vietnam_Foreign_Minister%27s_Meeting_-_2024_-_000172763.jpg"
+    },
+    {
+      "slug": "meeting-fm-2024-b",
+      "file": "meeting-fm-2024-b.jpg",
+      "role": "Introduction — diplomatic engagement",
+      "title": "File:Australia-Vietnam Foreign Minister's Meeting - 2024 - 000172786.jpg",
+      "licence": "CC BY 4.0",
+      "licence_code": "cc-by-4.0",
+      "author": "Sarah Hodges / DFAT",
+      "description": "Senator the Hon Penny Wong, Minister for Foreign Affairs, hosts Deputy Prime Minister and Minister of Foreign Affairs of Vietnam, His Excellency Bui Thanh Son, at the sixth annual Australia-Vietnam Foreign Ministers’ Meeting to advance cooperation under our Comprehensive Strategic Partnership and address key regional challenges in Adelaide on Friday 18 October 2024.",
+      "page": "https://commons.wikimedia.org/wiki/File%3AAustralia-Vietnam_Foreign_Minister%27s_Meeting_-_2024_-_000172786.jpg"
+    },
+    {
+      "slug": "asean-summit-2024",
+      "file": "asean-summit-2024.jpg",
+      "role": "Discussion — the summit that launched the A$2bn facility",
+      "title": "File:ASEAN-Australia Summit 2024.jpg",
+      "licence": "Public domain",
+      "licence_code": "pd",
+      "author": "Government of Indonesia",
+      "description": "Group photo session at the reception held by Australian Prime Minister Anthony Albanese for the ASEAN-Australia Special Summit at the Melbourne Convention and Exhibition Centre (MCEC), Melbourne, Australia on Tuesday, March 5, 2024 with ASEAN leaders",
+      "page": "https://commons.wikimedia.org/wiki/File%3AASEAN-Australia_Summit_2024.jpg"
+    },
+    {
+      "slug": "port-haiphong",
+      "file": "port-haiphong.jpg",
+      "role": "Trade pillar — Vietnamese container throughput",
+      "title": "File:Container Ship at the Hai Phong International Container Terminal 01.jpg",
+      "licence": "CC BY-SA 4.0",
+      "licence_code": "cc-by-sa-4.0",
+      "author": "Nathan.cima",
+      "description": "Le Maersk Sarat, un navire porte-conteneur stationne au port international de Hai Phong, le plus grand terminal de conteneurs en eau profonde du Vietnam du nord. Celui-ci attend d'être chargé ou déchargé avant de reprendre la mer vers une destination inconnue. Le Port de Hai Phong a une portée internationale. Si la majorité des navires proviennent des États d'Asie du Sud-Est et d'Asie de l'Est, certains d'entre eux proviennent d'Europe (France, Allemagne, Royaume-Uni) ou d'Amérique du Nord.",
+      "page": "https://commons.wikimedia.org/wiki/File%3AContainer_Ship_at_the_Hai_Phong_International_Container_Terminal_01.jpg"
+    },
+    {
+      "slug": "rmit-vietnam",
+      "file": "rmit-vietnam.jpg",
+      "role": "People & labour pillar — Australian education in Vietnam",
+      "title": "File:RMIT University Vietnam - Campus.JPG",
+      "licence": "CC BY-SA 3.0",
+      "licence_code": "cc-by-sa-3.0",
+      "author": "Prenn",
+      "description": "Đại học RMIT Việt Nam - Khuôn viên",
+      "page": "https://commons.wikimedia.org/wiki/File%3ARMIT_University_Vietnam_-_Campus.JPG"
+    }
+  ]
 };

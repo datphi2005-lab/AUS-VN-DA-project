@@ -899,6 +899,51 @@
     });
   }
 
+  /* ------------------------------------------------- image attribution */
+
+  var LICENCE_URL = {
+    'cc-by-4.0': 'https://creativecommons.org/licenses/by/4.0/',
+    'cc-by-sa-4.0': 'https://creativecommons.org/licenses/by-sa/4.0/',
+    'cc-by-sa-3.0': 'https://creativecommons.org/licenses/by-sa/3.0/',
+    'cc-by-3.0': 'https://creativecommons.org/licenses/by/3.0/',
+    'cc-by-2.0': 'https://creativecommons.org/licenses/by/2.0/'
+  };
+
+  function credits() {
+    var list = D.credits || [];
+    if (!list.length) return;
+
+    var bySlug = {};
+    list.forEach(function (c) { bySlug[c.slug] = c; });
+
+    // Fill the short credit line printed under each photograph.
+    document.querySelectorAll('[data-credit]').forEach(function (node) {
+      var c = bySlug[node.getAttribute('data-credit')];
+      if (!c) return;
+      var licHref = LICENCE_URL[c.licence_code];
+      var lic = licHref
+        ? '<a href="' + licHref + '" target="_blank" rel="noopener noreferrer">' + c.licence + '</a>'
+        : c.licence;
+      node.innerHTML = (c.author ? c.author + ' · ' : '') + lic +
+        ' · <a href="' + c.page + '" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>';
+    });
+
+    // Full listing in the method section.
+    var host = document.getElementById('creditList');
+    if (!host) return;
+    list.forEach(function (c) {
+      var n = el('div', 'credit');
+      n.appendChild(el('div', 'credit__file', c.file));
+      var meta = el('div', 'credit__meta');
+      meta.innerHTML = c.role + '<br>' +
+        (c.author ? '<strong>' + c.author + '</strong><br>' : '') +
+        '<a href="' + c.page + '" target="_blank" rel="noopener noreferrer">Source on Wikimedia Commons</a>';
+      n.appendChild(meta);
+      n.appendChild(el('span', 'credit__lic', c.licence));
+      host.appendChild(n);
+    });
+  }
+
   /* ---------------------------------------------------- inline figures */
 
   function inlineFigures() {
@@ -1211,6 +1256,7 @@
   conclusion();
   factcheck();
   sourceList();
+  credits();
   inlineFigures();
   wireControls();
 

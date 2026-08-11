@@ -24,13 +24,15 @@ year 2025.
 | `assets/styles.css` | Design system, colour-matched to the slide deck. |
 | `scripts/build_data.py` | Validates the dataset, derives every computed statistic, writes `data.js`. |
 | `scripts/make_slide_charts.py` | Renders deck-coloured chart PNGs into `docs/slide-charts/`. |
+| `scripts/fetch_media.py` | Downloads the flags and photographs, and generates their credits. |
+| `assets/img/` | Flags and photographs, plus `CREDITS.md` — see *Images* below. |
 | `docs/slide-charts/` | Six slide-ready images, sized and coloured for the deck. |
 | `notebook/` | The earlier exploratory notebook — see the warning below. |
 
 ## Running it
 
 ```bash
-python3 scripts/build_data.py && python3 scripts/make_slide_charts.py
+python3 scripts/fetch_media.py && python3 scripts/build_data.py && python3 scripts/make_slide_charts.py
 ```
 
 Then open `index.html` in a browser. To serve it locally instead:
@@ -61,6 +63,35 @@ accent `#A6CAE2`. The two data series are `#2a78d6` (Australia) and `#DA251D` (V
 against the `#F1F1F1` background: colour-blind ΔE 27.3, normal-vision ΔE 34.7, both above 3:1
 contrast. Every chart also ships direct labels and a table view, so colour is never the only channel
 carrying meaning.
+
+## Images, flags and insignia
+
+**Flags.** The Vietnamese and Australian flags are the canonical public-domain SVGs from Wikimedia
+Commons, not redrawn. That matters for the Australian flag in particular: the Union Jack's
+counterchanged St Patrick saltire, the seven-pointed Commonwealth Star and the five stars of the
+Southern Cross are all geometrically correct rather than approximated.
+
+**Photographs.** All five are official or Creative Commons licensed, downloaded and credited by
+`scripts/fetch_media.py`, which refuses any file whose licence is not on its allow-list:
+
+| Photo | Author | Licence |
+|---|---|---|
+| Wong & Bui Thanh Son, Foreign Ministers' Meeting 2024 (×2) | Sarah Hodges / DFAT | CC BY 4.0 |
+| ASEAN–Australia Special Summit, Melbourne 2024 | Government of Indonesia | Public domain |
+| Hai Phong International Container Terminal | Nathan.cima | CC BY-SA 4.0 |
+| RMIT University Vietnam campus | Prenn | CC BY-SA 3.0 |
+
+Attribution appears beside each image on the page and in `assets/img/CREDITS.md`, both generated from
+the licence metadata rather than typed by hand.
+
+**On national emblems.** The site deliberately does *not* display the Commonwealth Coat of Arms or
+the National Emblem of Viet Nam. These are protected state insignia, not ordinary logos — the
+Australian Government's published guidelines restrict the Coat of Arms to Commonwealth entities and
+prohibit uses implying official endorsement, and Viet Nam's emblem is regulated in the same spirit.
+Since this page analyses and criticises both governments' economic policy, carrying their insignia
+would imply an endorsement that does not exist. National flags carry no such restriction, which is
+why they are used instead. The institutional marks appropriate to this work are the Diplomatic
+Academy of Vietnam and Macquarie University logos already on the presentation deck.
 
 ## Reading the data critically
 
