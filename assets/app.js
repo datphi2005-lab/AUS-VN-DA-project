@@ -1218,47 +1218,72 @@
 
   /* --------------------------------------------------------------- init */
 
-  heroTiles();
+  /* Sections are meant to be removable — the fact-check block, for instance, is
+     internal and gets dropped before sharing. Render each one independently so a
+     missing mount point degrades to "that section is absent" rather than
+     throwing and taking every later section down with it. */
+  function safe(name, fn) {
+    try {
+      fn();
+    } catch (err) {
+      if (window.console && console.warn) {
+        console.warn('[av] section "' + name + '" skipped:', err && err.message);
+      }
+    }
+  }
+
+  safe('heroTiles', heroTiles);
 
   // I. Introduction
-  statusCard();
-  macroGrid();
-  rbaCard();
+  safe('statusCard', statusCard);
+  safe('macroGrid', macroGrid);
+  safe('rbaCard', rbaCard);
 
   // II. State of play
-  ratioChart();
-  pillar('pillarTrade', 'trade');
-  tradeChart();
-  cr6Chart();
-  compositionChart();
-  ledgers();
+  safe('ratioChart', ratioChart);
+  safe('pillarTrade', function () { pillar('pillarTrade', 'trade'); });
+  safe('tradeChart', tradeChart);
+  safe('cr6', cr6Chart);
+  safe('composition', compositionChart);
+  safe('ledgers', ledgers);
 
-  pillar('pillarInvestment', 'investment');
-  investmentChart();
-  investmentDeltas();
-  buildInvTable();
-  fdiContext();
+  safe('pillarInvestment', function () { pillar('pillarInvestment', 'investment'); });
+  safe('investmentChart', investmentChart);
+  safe('invDeltas', investmentDeltas);
+  safe('invTable', buildInvTable);
+  safe('fdiContext', fdiContext);
 
-  pillar('pillarLabour', 'labour');
-  vlmaCard();
-  peopleTiles();
-  partnerChart('chartVnExports', D.vietnam_partners_2025.export_destinations, 'Share of Vietnam’s merchandise exports by destination, 2025');
-  partnerChart('chartVnImports', D.vietnam_partners_2025.import_sources, 'Share of Vietnam’s merchandise imports by source, 2025');
+  safe('pillarLabour', function () { pillar('pillarLabour', 'labour'); });
+  safe('vlmaCard', vlmaCard);
+  safe('peopleTiles', peopleTiles);
+  safe('vnExports', function () {
+    partnerChart('chartVnExports', D.vietnam_partners_2025.export_destinations,
+                 'Share of Vietnam’s merchandise exports by destination, 2025');
+  });
+  safe('vnImports', function () {
+    partnerChart('chartVnImports', D.vietnam_partners_2025.import_sources,
+                 'Share of Vietnam’s merchandise imports by source, 2025');
+  });
 
   // III. Discussion
-  recommendations();
-  opportunities();
-  scorecard();
-  timeline();
-  instruments();
+  safe('recommendations', recommendations);
+  safe('opportunities', opportunities);
+  safe('scorecard', scorecard);
+  safe('timeline', timeline);
+  safe('instruments', instruments);
 
   // IV. Conclusion + apparatus
-  conclusion();
-  factcheck();
-  sourceList();
-  credits();
-  inlineFigures();
-  wireControls();
+  safe('conclusion', conclusion);
+  safe('factcheck', factcheck);
+  safe('sourceList', sourceList);
+  safe('credits', credits);
+  safe('inlineFigures', inlineFigures);
+  safe('wireControls', wireControls);
+
+  // Drop nav links whose target section is not present in this build.
+  [].forEach.call(document.querySelectorAll('.navlinks a[href^="#"]'), function (a) {
+    if (!document.getElementById(a.getAttribute('href').slice(1))) a.remove();
+  });
 
   window.addEventListener('scroll', hideTip, { passive: true });
 })();
