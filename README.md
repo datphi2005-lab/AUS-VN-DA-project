@@ -6,10 +6,12 @@ presentation.
 **Le Van Ly · Nguyen Phuong Anh · Nguyen Hoang Dat Phi** — compiled 11 August 2026, statistical base
 year 2025.
 
-> **The headline finding.** In 2025 Australia and Vietnam traded **A$30.0bn** of goods and services.
-> The entire stock of investment each holds in the other is **A$2.0bn** — a ratio of **14.8 : 1**.
-> Australia's investment stock in Vietnam has fallen **68.5%** since 2019, and by 2025 Vietnam held
-> **more** capital in Australia (A$1,104m) than Australia held in Vietnam (A$921m).
+> **The headline finding.** In 2025 Australia and Vietnam traded **A$30.0bn** of goods and
+> services. In the same year Vietnam attracted **US$27.62bn** of realised foreign direct investment
+> — its strongest in five years — and **Australia was not among the leading sources**. Singapore,
+> China, Hong Kong and Japan took more than two-thirds of newly registered capital between them.
+> Australia's entire cumulative registered capital in Vietnam since 1988 is US$1.9bn across 712
+> projects, less than Singapore committed in 2025 alone.
 
 ---
 
@@ -21,12 +23,14 @@ year 2025.
 | `data/dataset.json` | **Single source of truth.** Every figure, with a source id attached. |
 | `assets/data.js` | Generated from `dataset.json`. Do not edit by hand. |
 | `assets/app.js` | Hand-built SVG charts and page logic. No external libraries. |
-| `assets/styles.css` | Design system, colour-matched to the slide deck. |
+| `assets/styles.css` | Design system — see *Design* below. |
 | `scripts/build_data.py` | Validates the dataset, derives every computed statistic, writes `data.js`. |
 | `scripts/make_slide_charts.py` | Renders deck-coloured chart PNGs into `docs/slide-charts/`. |
 | `scripts/fetch_media.py` | Downloads the flags and photographs, and generates their credits. |
 | `assets/img/` | Flags and photographs, plus `CREDITS.md` — see *Images* below. |
-| `docs/slide-charts/` | Six slide-ready images, sized and coloured for the deck. |
+| `docs/slide-charts/` | Slide-ready chart images for the presentation deck. |
+| `scripts/build_standalone.py` | Bundles everything into one self-contained HTML file. |
+| `dist/` | The self-contained single-file builds. |
 | `notebook/` | The earlier exploratory notebook — see the warning below. |
 
 ## Running it
@@ -52,17 +56,20 @@ build if any of these fail:
 - Vietnam's partner shares must be rank-ordered and sum to under 100%;
 - every `source` id referenced anywhere must resolve to an entry in `meta.sources`.
 
-Derived statistics (the 14.8× ratio, concentration ratios, stock changes, the EEES scorecard) are
-computed once in `build_data.py` and reused by both the website and the slide charts, so a figure
-can never disagree between the two.
+Derived statistics (concentration ratios, commodity shares, the scorecard) are computed once in
+`build_data.py` and reused by both the website and the slide charts, so a figure can never disagree
+between the two.
 
-## Colour
+## Design
 
-The site and the charts use the deck's palette — navy `#101B40`, page `#F1F1F1`, panel `#DCE2EB`,
-accent `#A6CAE2`. The two data series are `#2a78d6` (Australia) and `#DA251D` (Vietnam), validated
-against the `#F1F1F1` background: colour-blind ΔE 27.3, normal-vision ΔE 34.7, both above 3:1
-contrast. Every chart also ships direct labels and a table view, so colour is never the only channel
-carrying meaning.
+An editorial data-journalism treatment: **Playfair Display** for display type and **Source Sans 3**
+for body, UI and chart labels, set on a 660px reading column with figures breaking out to 900 and
+1100px. Ground is white, ink `#171717`, hairlines `#E2E2E2`.
+
+Data colours are `#004F9F` (Australia) and `#DA251D` (Vietnam) against `#C9CDD2` for context.
+Checked against the white ground rather than eyeballed: normal-vision ΔE 35.9, worst colour-blind ΔE
+21.4, contrast 8.02:1 and 4.93:1. Every chart also carries direct labels, so colour is never the only
+channel carrying meaning.
 
 ## Images, flags and insignia
 
@@ -71,7 +78,7 @@ Commons, not redrawn. That matters for the Australian flag in particular: the Un
 counterchanged St Patrick saltire, the seven-pointed Commonwealth Star and the five stars of the
 Southern Cross are all geometrically correct rather than approximated.
 
-**Photographs.** All five are official or Creative Commons licensed, downloaded and credited by
+**Photographs.** All four are official or Creative Commons licensed, downloaded and credited by
 `scripts/fetch_media.py`, which refuses any file whose licence is not on its allow-list:
 
 | Photo | Author | Licence |
@@ -95,11 +102,14 @@ Academy of Vietnam and Macquarie University logos already on the presentation de
 
 ## Reading the data critically
 
-- **The investment series has four observations**, not an annual run: 2018, 2019, 2022 and 2025.
-  Lines between points are interpolation for readability. 2020, 2021, 2023 and 2024 were not covered
-  by a DFAT fact-sheet edition retrieved for this project.
-- **Stocks are volatile at this scale.** A A$2bn bilateral position moves tens of percent on a single
-  corporate transaction. Read changes as direction, not precision.
+- **Investment is measured as flows, not stocks.** The analysis uses FDI flows and registered
+  capital, which is how both governments discuss investment. A separate ABS balance-of-payments
+  series measures the bilateral investment *stock*; it remains in `data/dataset.json` under
+  `investment_stocks` and tells a compatible story, but it answers a different question and nothing
+  on the site is argued from it.
+- **Registered is not realised.** Registered capital is a commitment, not money deployed. Vietnam's
+  US$38.42bn registered against US$27.62bn realised shows the gap, and cumulative registration
+  totals never net out abandoned projects.
 - **Two ledgers disagree, for good reasons.** DFAT/ABS reports A$30.0bn of goods *and services*;
   Vietnam Customs reports about US$14bn of *merchandise*. Services — education and recreational
   travel — are nearly A$5.7bn of the difference, and they flip the sign of the trade balance. On
@@ -121,7 +131,7 @@ published DFAT line items.
 
 ## Sources
 
-All 18 sources are listed with links in the site's *Method & sources* section. The primary ones:
+All 21 sources are listed with links in the site's *Method & sources* section. The primary ones:
 
 - DFAT, [Vietnam country economic fact sheet](https://www.dfat.gov.au/sites/default/files/viet-cef.pdf) (ABS/IMF data, 2025) — the core dataset
 - DFAT, [Vietnam country brief](https://www.dfat.gov.au/geo/vietnam/vietnam-country-brief)

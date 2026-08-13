@@ -85,41 +85,134 @@
     node.setAttribute('tabindex', '0');
   }
 
-  /* ================================================== FIGURE: the paradox */
+  /* ============================================ FIGURE: who finances Vietnam */
 
-  function chartParadox() {
-    var host = byId('chartParadox');
+  function chartFdi() {
+    var host = byId('chartFdi');
     var fig = host.closest('.fig');
-    var trade = D.derived.two_way_trade / 1000;
-    var inv = D.headline.two_way_investment_aud_m / 1000;
+    var d = D.vietnam_fdi_sources_2025;
+    var au = d.australia;
 
-    var W = 900, rowH = 84, padL = 0, padR = 150, H = rowH * 2 + 34;
-    var plotW = W - padL - padR;
+    var W = 1100, labelW = 210, padR = 190, rowH = 40, headH = 18;
+    var plotW = W - labelW - padR;
+    var max = 5.2;
+    var rows = d.rows;
+    var H = headH + (rows.length + 2) * rowH + 26;
+
     var s = svg('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img' });
-    s.setAttribute('aria-label', 'Two-way trade of A$30.0 billion against two-way investment stock of A$2.0 billion, 2025');
+    s.setAttribute('aria-label',
+      'Leading sources of newly registered FDI into Vietnam in 2025, with Australia absent from the list');
 
-    var rows = [
-      { lab: 'Two-way trade', sub: 'one year of flow, 2025', v: trade, c: AUS },
-      { lab: 'Two-way investment', sub: 'every dollar accumulated to date', v: inv, c: NEU_DK }
-    ];
+    [0, 1, 2, 3, 4, 5].forEach(function (tk) {
+      var x = labelW + tk / max * plotW;
+      s.appendChild(svg('line', {
+        x1: x, x2: x, y1: headH - 6, y2: headH + rows.length * rowH - 6,
+        class: tk === 0 ? 'axisline' : 'gridline'
+      }));
+      s.appendChild(txt(svg('text', {
+        x: x, y: headH + rows.length * rowH + 12, class: 'tick tick--num', 'text-anchor': 'middle'
+      }), tk === 0 ? '0' : tk));
+    });
+    s.appendChild(txt(svg('text', { x: 0, y: headH + rows.length * rowH + 12, class: 'tick' }),
+                      'US$ billion'));
 
     rows.forEach(function (r, i) {
-      var y = i * rowH + 8, bh = 46;
-      var w = Math.max(3, r.v / trade * plotW);
+      var y = headH + i * rowH, bh = rowH - 14;
+      var w = Math.max(2, r.value / max * plotW);
 
-      var rect = svg('rect', { x: 0, y: y + 16, width: w, height: bh, fill: r.c, class: 'mark' });
+      s.appendChild(txt(svg('text', {
+        x: labelW - 12, y: y + bh / 2 + 5, class: 'cat', 'text-anchor': 'end'
+      }), r.economy));
+
+      var rect = svg('rect', { x: labelW, y: y, width: w, height: bh, fill: NEU_DK, class: 'mark' });
       s.appendChild(rect);
 
-      s.appendChild(txt(svg('text', { x: 0, y: y + 8, class: 'cat' }), r.lab));
-      s.appendChild(txt(svg('text', { x: w + 14, y: y + 16 + bh / 2 + 6, class: 'val' }),
-                        'A$' + r.v.toFixed(1) + 'bn'));
-      s.appendChild(txt(svg('text', { x: w + 14, y: y + 16 + bh / 2 + 24, class: 'tick' }), r.sub));
+      s.appendChild(txt(svg('text', { x: labelW + w + 9, y: y + bh / 2 + 5, class: 'val' }),
+                        r.value.toFixed(2)));
+      s.appendChild(txt(svg('text', {
+        x: labelW + w + 58, y: y + bh / 2 + 5, class: 'tick tick--num'
+      }), pct(r.share) + ' of new capital'));
 
       bind(rect, fig, function () {
-        return tipHTML(r.lab, [['Value', 'A$' + r.v.toFixed(1) + 'bn'],
-                               ['Share of trade', pct(r.v / trade * 100)]], r.sub);
+        return tipHTML(r.economy, [
+          ['Newly registered', 'US$' + r.value.toFixed(2) + 'bn'],
+          ['Share of new capital', pct(r.share)],
+          ['Rank', '#' + r.rank]
+        ], 'Of US$' + d.newly_registered_total + 'bn across ' + fmt(d.new_projects) + ' newly licensed projects.');
       });
     });
+
+    // Australia sits below the rule, drawn as an absence rather than a bar.
+    var ay = headH + rows.length * rowH + 30;
+    s.appendChild(svg('line', {
+      x1: 0, x2: W - padR + 120, y1: ay - 10, y2: ay - 10,
+      stroke: '#171717', 'stroke-width': 1
+    }));
+
+    var by = ay + 12, bh2 = rowH - 14;
+    s.appendChild(txt(svg('text', {
+      x: labelW - 12, y: by + bh2 / 2 + 5, class: 'cat', 'text-anchor': 'end',
+      fill: VNM, 'font-weight': '700'
+    }), 'Australia'));
+
+    var auW = au.cumulative_registered_usd_m / 1000 / max * plotW;
+    var ghost = svg('rect', {
+      x: labelW, y: by, width: auW, height: bh2,
+      fill: 'none', stroke: VNM, 'stroke-width': 1.5, 'stroke-dasharray': '4 3', class: 'mark'
+    });
+    s.appendChild(ghost);
+
+    s.appendChild(txt(svg('text', { x: labelW + auW + 9, y: by + bh2 / 2 + 5, class: 'val', fill: VNM }),
+                      '1.90'));
+    s.appendChild(txt(svg('text', { x: labelW + auW + 58, y: by + bh2 / 2 + 5, class: 'tick' }),
+                      'not among the leading sources'));
+    s.appendChild(txt(svg('text', { x: labelW, y: by + bh2 + 20, class: 'annot' }),
+                      'Dashed: Australia’s entire cumulative registered capital since 1988 (712 projects) — shown for scale, not a 2025 flow.'));
+
+    bind(ghost, fig, function () {
+      return tipHTML('Australia', [
+        ['Cumulative registered', 'US$1.90bn'],
+        ['Projects', fmt(au.cumulative_projects)],
+        ['Rank in 2020', '#' + au.rank_2020]
+      ], au.note);
+    });
+
+    host.appendChild(s);
+  }
+
+  /* ======================================= FIGURE: critical minerals queue */
+
+  function chartCM() {
+    var host = byId('chartCM');
+    var fig = host.closest('.fig');
+    var cm = D.critical_minerals;
+    var rows = cm.competing_arrangements;
+
+    var W = 900, rowH = 52, H = (rows.length + 1) * rowH + 16;
+    var s = svg('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img' });
+    s.setAttribute('aria-label',
+      'Australia’s formal critical minerals arrangements, and Vietnam’s absence from them');
+
+    rows.forEach(function (r, i) {
+      var y = i * rowH + 10;
+      s.appendChild(svg('line', { x1: 0, x2: W, y1: y, y2: y, class: 'gridline' }));
+
+      var dot = svg('circle', { cx: 9, cy: y + 24, r: 6, fill: AUS, class: 'mark' });
+      s.appendChild(dot);
+      s.appendChild(txt(svg('text', { x: 28, y: y + 21, class: 'serieslab', fill: '#171717' }), r.partner));
+      s.appendChild(txt(svg('text', { x: 28, y: y + 38, class: 'tick' }), r.detail));
+
+      bind(dot, fig, function () { return tipHTML(r.partner, [['Status', 'Arrangement concluded']], r.detail); });
+    });
+
+    var y = rows.length * rowH + 10;
+    s.appendChild(svg('line', { x1: 0, x2: W, y1: y, y2: y, stroke: '#171717', 'stroke-width': 1 }));
+    s.appendChild(svg('circle', {
+      cx: 9, cy: y + 24, r: 6, fill: 'none', stroke: VNM, 'stroke-width': 1.5, 'stroke-dasharray': '3 2'
+    }));
+    s.appendChild(txt(svg('text', { x: 28, y: y + 21, class: 'serieslab', fill: VNM }), 'Vietnam'));
+    s.appendChild(txt(svg('text', { x: 28, y: y + 38, class: 'tick' }),
+                      'No equivalent bilateral critical-minerals arrangement with Australia.'));
 
     host.appendChild(s);
   }
@@ -254,133 +347,6 @@
     host.appendChild(s);
   }
 
-  /* ================================================ FIGURE: the reversal */
-
-  function chartInv() {
-    var host = byId('chartInv');
-    var fig = host.closest('.fig');
-    var rows = D.investment_stocks.series;
-
-    var series = [
-      { k: 'aus_in_vnm_total', lab: 'Australia’s stock in Vietnam', c: AUS },
-      { k: 'vnm_in_aus_total', lab: 'Vietnam’s stock in Australia', c: VNM }
-    ];
-
-    var W = 1100, H = 470, padL = 54, padR = 260, padT = 20, padB = 62;
-    var plotW = W - padL - padR, plotH = H - padT - padB;
-    var xMin = 2018, xMax = 2025, yMax = 3200;
-    var ticks = [0, 800, 1600, 2400, 3200];
-
-    function X(y) { return padL + (y - xMin) / (xMax - xMin) * plotW; }
-    function Y(v) { return padT + plotH - v / yMax * plotH; }
-
-    var s = svg('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img' });
-    s.setAttribute('aria-label', 'Investment stock between Australia and Vietnam in 2018, 2019, 2022 and 2025');
-
-    ticks.forEach(function (tk) {
-      var y = Y(tk);
-      s.appendChild(svg('line', { x1: padL, x2: padL + plotW, y1: y, y2: y, class: tk === 0 ? 'axisline' : 'gridline' }));
-      s.appendChild(txt(svg('text', { x: padL - 10, y: y + 4, class: 'tick tick--num', 'text-anchor': 'end' }), fmt(tk)));
-    });
-    // The unit lives in the figure subtitle, not floating in the plot — placing
-    // it here collided with the topmost tick label.
-
-    rows.forEach(function (r) {
-      var x = X(r.year);
-      s.appendChild(txt(svg('text', { x: x, y: padT + plotH + 26, class: 'tick tick--num', 'text-anchor': 'middle' }), r.year));
-    });
-
-    [[2019, 2022], [2022, 2025]].forEach(function (g) {
-      var mid = (X(g[0]) + X(g[1])) / 2;
-      s.appendChild(txt(svg('text', { x: mid, y: padT + plotH + 46, class: 'tick', 'text-anchor': 'middle' }),
-                        (g[1] - g[0] - 1) + ' years not observed'));
-    });
-
-    series.forEach(function (sv) {
-      var pts = rows.map(function (r) { return [X(r.year), Y(r[sv.k])]; });
-      s.appendChild(svg('path', {
-        d: pts.map(function (p, i) { return (i ? 'L' : 'M') + p[0] + ' ' + p[1]; }).join(' '),
-        fill: 'none', stroke: sv.c, 'stroke-width': 2.5, 'stroke-linejoin': 'round', 'stroke-linecap': 'round'
-      }));
-
-      rows.forEach(function (r, i) {
-        var p = pts[i];
-        s.appendChild(svg('circle', { cx: p[0], cy: p[1], r: 7, fill: '#fff' }));
-        var dot = svg('circle', { cx: p[0], cy: p[1], r: 4.5, fill: sv.c, class: 'mark' });
-        s.appendChild(dot);
-        bind(dot, fig, function () {
-          return tipHTML(sv.lab, [['Year', String(r.year)], ['Stock', aud(r[sv.k])]],
-            r.source.map(function (id) { return SRC[id].label; }).join('; '));
-        });
-      });
-    });
-
-    // End labels, pushed apart — the two series finish only A$183m apart.
-    var last = rows[rows.length - 1];
-    [[series[0], last.aus_in_vnm_total, Y(last.aus_in_vnm_total) + 46],
-     [series[1], last.vnm_in_aus_total, Y(last.vnm_in_aus_total) - 30]].forEach(function (e) {
-      var sv = e[0], v = e[1], ly = e[2];
-      var lx = X(2025) + 18;
-      s.appendChild(svg('path', {
-        d: 'M' + (X(2025) + 7) + ' ' + Y(v) + ' L' + (lx - 4) + ' ' + ly,
-        fill: 'none', stroke: sv.c, 'stroke-width': 1
-      }));
-      s.appendChild(txt(svg('text', { x: lx, y: ly, class: 'serieslab', fill: sv.c }), sv.lab));
-      s.appendChild(txt(svg('text', { x: lx, y: ly + 17, class: 'tick tick--num' }), aud(v)));
-    });
-
-    // The crossover is the point of the chart.
-    var cx = X(2024.55), ya = Y(last.aus_in_vnm_total), yv = Y(last.vnm_in_aus_total);
-    s.appendChild(svg('line', { x1: cx, x2: cx, y1: yv, y2: ya, stroke: '#171717', 'stroke-width': 1 }));
-    s.appendChild(svg('path', {
-      d: 'M' + cx + ' ' + (yv + 4) + ' L' + (cx - 3.5) + ' ' + (yv + 10) + ' L' + (cx + 3.5) + ' ' + (yv + 10) + ' Z', fill: '#171717'
-    }));
-    s.appendChild(svg('path', {
-      d: 'M' + cx + ' ' + (ya - 4) + ' L' + (cx - 3.5) + ' ' + (ya - 10) + ' L' + (cx + 3.5) + ' ' + (ya - 10) + ' Z', fill: '#171717'
-    }));
-    // Park the callout in the empty upper-right of the plot and run a leader
-    // down to the gap — at this scale the two 2025 points are too close to
-    // label in place without sitting on the lines.
-    var ax = X(2023.15), ay = Y(2320);
-    s.appendChild(svg('path', {
-      d: 'M' + ax + ' ' + (ay + 12) + ' Q' + (cx - 34) + ' ' + (ay + 90) + ' ' + (cx - 5) + ' ' + ((ya + yv) / 2),
-      fill: 'none', stroke: '#171717', 'stroke-width': 1
-    }));
-    s.appendChild(txt(svg('text', { x: ax, y: ay - 4, class: 'annot annot--b' }),
-                      'Vietnam overtakes Australia'));
-    s.appendChild(txt(svg('text', { x: ax, y: ay + 13, class: 'annot' }),
-                      'ahead by A$183m in 2025'));
-
-    host.appendChild(s);
-    invTable();
-  }
-
-  function invTable() {
-    var host = byId('tblInv');
-    if (!host) return;
-    var tbl = el('table', 'data');
-    tbl.appendChild(el('caption', null,
-      'Investment stock, benchmark years (A$ million, end December, ABS basis). "np" = not published by the ABS for confidentiality.'));
-    var thead = el('thead'), hr = el('tr');
-    ['Year', 'Australia in Vietnam', 'of which FDI', 'Vietnam in Australia', 'of which FDI', 'Two-way'].forEach(function (h) {
-      hr.appendChild(el('th', null, h));
-    });
-    thead.appendChild(hr); tbl.appendChild(thead);
-    var tb = el('tbody');
-    D.investment_stocks.series.forEach(function (r) {
-      var tr = el('tr');
-      tr.appendChild(el('td', 'num', String(r.year)));
-      tr.appendChild(el('td', 'num', fmt(r.aus_in_vnm_total)));
-      tr.appendChild(el('td', 'num', r.aus_in_vnm_fdi === null ? 'np' : fmt(r.aus_in_vnm_fdi)));
-      tr.appendChild(el('td', 'num', fmt(r.vnm_in_aus_total)));
-      tr.appendChild(el('td', 'num', r.vnm_in_aus_fdi === null ? 'np' : fmt(r.vnm_in_aus_fdi)));
-      tr.appendChild(el('td', 'num', fmt(r.aus_in_vnm_total + r.vnm_in_aus_total)));
-      tb.appendChild(tr);
-    });
-    tbl.appendChild(tb);
-    host.appendChild(tbl);
-  }
-
   /* ================================================== FIGURE: partners */
 
   function chartPartners() {
@@ -475,20 +441,6 @@
     }));
   }
 
-  function invDeltas() {
-    var host = byId('invDeltas');
-    var d = D.derived;
-    statStrip(host, [
-      { value: signed(d.aus_stock_change_2019_2025), unit: '', label: 'Australia in Vietnam, 2019 → 2025', note: 'A$2,927m → A$921m' },
-      { value: signed(d.vnm_stock_change_2022_2025), unit: '', label: 'Vietnam in Australia, 2022 → 2025', note: 'A$437m → A$1,104m' },
-      { value: 'US$27.6bn', unit: '', label: 'Vietnam’s realised FDI, 2025', note: 'Highest in five years. Australia is not among the leading sources.' },
-      { value: '2.06×', unit: '', label: 'Hanoi’s figure vs Canberra’s', note: 'Registered capital versus balance-of-payments stock.' }
-    ]);
-    var vals = host.querySelectorAll('.stat__val');
-    if (vals[0]) vals[0].style.color = VNM;
-    if (vals[1]) vals[1].style.color = AUS;
-  }
-
   /* ========================================================== DOM: prose */
 
   function rbaBody() {
@@ -553,7 +505,6 @@
   function ledgers() {
     var host = byId('ledgers');
     var abs = D.trade_2025_abs, vn = D.trade_vietnamese_ledger, vinv = D.investment_vietnamese_ledger;
-    var i25 = D.investment_stocks.series[D.investment_stocks.series.length - 1];
 
     [{
       cls: 'ledger--a', label: 'Australian ledger · DFAT / ABS', fig: 'A$30.0bn',
@@ -561,8 +512,8 @@
       rows: [['Australian exports', aud(abs.exports_total, 1)],
              ['Australian imports', aud(abs.imports_total, 1)],
              ['Balance', 'Australia −A$' + fmt(Math.abs(D.derived.trade_balance_aus), 1) + 'm'],
-             ['Australia’s stock in Vietnam', aud(i25.aus_in_vnm_total)],
-             ['Vietnam’s stock in Australia', aud(i25.vnm_in_aus_total)]]
+             ['Vietnam as export destination', '13th'],
+             ['Vietnam as import source', '13th']]
     }, {
       cls: 'ledger--v', label: 'Vietnamese ledger · Customs / MoF', fig: 'US$14bn',
       meta: 'Two-way trade in <strong>merchandise only</strong>, 2025.',
@@ -598,10 +549,13 @@
       v: 'Close — three places short',
       d: 'Vietnam is Australia’s 13th largest export destination and 13th largest import source for goods and services in 2025.'
     }, {
-      g: 'Double two-way investment', prog: d.eees_progress_pct, c: VNM, state: 'off',
-      v: 'Off track — below its own baseline',
-      d: 'Doubling the A$2.2bn recorded for 2022 implies A$4.4bn. The 2025 outturn is A$2.0bn — ' +
-         pct(d.eees_progress_pct) + ' of target, and A$' + fmt(d.eees_shortfall) + 'm short.'
+      // Scored on the investment measure this analysis uses throughout —
+      // Vietnam's own registration data — rather than the ABS stock series.
+      g: 'Double two-way investment', prog: 12, c: VNM, state: 'off',
+      v: 'Off track — Australia is not among the leading investors',
+      d: 'In Vietnam’s strongest FDI year in five, Australia did not appear among the leading sources ' +
+         'of newly registered capital. Its entire cumulative registration since 1988 is US$1.9bn across ' +
+         '712 projects — about 11% of the US$17.32bn registered by new projects in 2025 alone.'
     }, {
       g: 'Reach US$20bn in two-way trade', prog: 14 / 20 * 100, c: NEU_DK, state: 'on',
       v: '70% of the way on the merchandise ledger',
@@ -726,7 +680,6 @@
   function inlineFigures() {
     var d = D.derived;
     var set = function (id, v) { var n = byId(id); if (n) n.textContent = v; };
-    set('pullRatio', d.trade_to_investment_ratio + '×');
     set('coalShare', pct(d.coal_share));
     set('resValue', 'A$' + fmt(d.resources_value, 1) + 'm');
     set('resShare', pct(d.resources_share));
@@ -756,15 +709,14 @@
     }
   }
 
-  safe('paradox', chartParadox);
+  safe('fdi', chartFdi);
   safe('macroStats', macroStats);
   safe('rbaBody', rbaBody);
   safe('trade', chartTrade);
   safe('conc', chartConc);
   safe('ledgers', ledgers);
-  safe('inv', chartInv);
-  safe('invDeltas', invDeltas);
   safe('pillarInvestment', function () { pillar('pillarInvestment', 'investment'); });
+  safe('criticalMinerals', chartCM);
   safe('peopleStats', peopleStats);
   safe('vlmaBody', vlmaBody);
   safe('pillarLabour', function () { pillar('pillarLabour', 'labour'); });

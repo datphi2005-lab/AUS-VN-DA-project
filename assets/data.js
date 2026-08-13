@@ -116,6 +116,24 @@ window.AVDATA = {
         "label": "Vietnam in the race to attract high-tech FDI",
         "publisher": "VOV (Voice of Vietnam)",
         "url": "https://english.vov.vn/en/economy/vietnam-in-the-race-to-attract-high-tech-fdi-post1285545.vov"
+      },
+      "fdisources": {
+        "id": "fdisources",
+        "label": "FDI inflows into Viet Nam exceed $38 billion in 2025",
+        "publisher": "Viet Nam News / Vietnam Law Magazine, citing the Ministry of Finance Foreign Investment Agency",
+        "url": "https://vietnamnews.vn/economy/1743208/fdi-inflows-into-viet-nam-exceed-38-billion-in-2025.html"
+      },
+      "aspi_cm": {
+        "id": "aspi_cm",
+        "label": "Mapping Australia's strategic critical minerals partnerships",
+        "publisher": "Australian Strategic Policy Institute",
+        "url": "https://www.aspi.org.au/critical-minerals-policy-centre/mapping-australias-strategic-critical-minerals-partnerships/"
+      },
+      "eu_cm": {
+        "id": "eu_cm",
+        "label": "EU–Australia Memorandum of Understanding on critical and strategic minerals (28 May 2024)",
+        "publisher": "European Commission / CMS",
+        "url": "https://cms.law/en/fra/legal-updates/overview-of-the-eu-australia-memorandum-of-understanding-on-critical-and-strategic-minerals"
       }
     }
   },
@@ -151,6 +169,101 @@ window.AVDATA = {
       "Growth in Australia's major trading partners has been stronger than expected, as the boost from AI-related investment has outweighed the adverse effects of the conflict.",
       "Historically weak productivity growth continues to constrain Australia's potential growth."
     ]
+  },
+  "vietnam_fdi_sources_2025": {
+    "unit": "US$ billion of NEWLY REGISTERED capital, 2025",
+    "note": "Shares are of newly registered capital (US$17.32bn across 4,054 newly licensed projects), not of the US$38.42bn total registered figure, which also includes capital added to existing projects and share purchases. Australia does not appear among the leading sources.",
+    "source": [
+      "fdisources",
+      "fdi2025"
+    ],
+    "newly_registered_total": 17.32,
+    "new_projects": 4054,
+    "rows": [
+      {
+        "economy": "Singapore",
+        "value": 4.84,
+        "share": 27.9,
+        "rank": 1
+      },
+      {
+        "economy": "China",
+        "value": 3.64,
+        "share": 21.0,
+        "rank": 2
+      },
+      {
+        "economy": "Hong Kong (SAR of China)",
+        "value": 1.73,
+        "share": 10.0,
+        "rank": 3
+      },
+      {
+        "economy": "Japan",
+        "value": 1.62,
+        "share": 9.4,
+        "rank": 4
+      },
+      {
+        "economy": "Sweden",
+        "value": 1.0,
+        "share": 5.8,
+        "rank": 5
+      },
+      {
+        "economy": "Taiwan",
+        "value": 0.9658,
+        "share": 5.6,
+        "rank": 6
+      },
+      {
+        "economy": "Republic of Korea",
+        "value": 0.8959,
+        "share": 5.2,
+        "rank": 7
+      }
+    ],
+    "australia": {
+      "absent_from_leaders": true,
+      "cumulative_registered_usd_m": 1900,
+      "cumulative_projects": 712,
+      "cumulative_asof": "December 2025",
+      "rank_2020": 20,
+      "note": "Australia's entire cumulative registered capital in Vietnam, built up since 1988, is smaller than the newly registered capital Singapore committed in 2025 alone."
+    }
+  },
+  "critical_minerals": {
+    "unit": "Australia's critical-minerals partnership network",
+    "source": [
+      "cms",
+      "aspi_cm",
+      "eu_cm"
+    ],
+    "australia_strategy": "Critical Minerals Strategy 2023–2030, carrying roughly A$4bn of commitments including a A$2bn Critical Minerals Facility through Export Finance Australia.",
+    "vietnam_law": "Vietnam's 2024 Law on Geology and Minerals, adopted 29 November 2024 and in force from 1 July 2025, replaced the 2010 Mineral Law and shifted the framework from licensing toward resource life-cycle planning.",
+    "competing_arrangements": [
+      {
+        "partner": "United States",
+        "detail": "Critical minerals framework signed 2025, reported at around US$8.5bn."
+      },
+      {
+        "partner": "Japan",
+        "detail": "Australia–Japan critical minerals partnership; joint statement on elevated cooperation."
+      },
+      {
+        "partner": "European Union",
+        "detail": "Memorandum of Understanding on critical and strategic minerals, 28 May 2024, covering the full value chain."
+      },
+      {
+        "partner": "Quad (India, Japan, US)",
+        "detail": "Quad Critical Minerals Initiative launched July 2025."
+      },
+      {
+        "partner": "Minerals Security Partnership",
+        "detail": "15 core members since 2022, with a forum of more than 30 countries by 2024."
+      }
+    ],
+    "vietnam_position": "Vietnam is not a core member of the Minerals Security Partnership and is not in the Quad initiative, so it competes for Australian critical-minerals capital against partners with formal, funded arrangements already in place."
   },
   "vietnam_fdi_2025": {
     "unit": "US$ billion, Vietnam Ministry of Finance / Foreign Investment Agency",
@@ -242,45 +355,33 @@ window.AVDATA = {
       "id": "investment",
       "number": 2,
       "title": "Investment relations",
-      "state_of_play": "Investment is the weakest pillar of the relationship, and on the Australian statistical ledger it has gone backwards. Vietnam attracted US$38.42bn of registered and US$27.62bn of realised FDI in 2025 — the highest disbursement in five years — with Singapore, China, Hong Kong and Japan dominating. Australia does not feature among those leading sources. Total two-way investment stock was A$2.0bn in 2025, against A$30.0bn of annual trade.",
+      "state_of_play": "Investment remains the weakest pillar of the economic relationship. Vietnam attracted US$27.62bn in realised FDI in 2025 — its highest disbursement in five years — against US$38.42bn of total registered capital. Singapore, China, Hong Kong and Japan dominated newly registered capital, taking more than two-thirds of it between them. Australia does not feature among these leading sources.",
       "advantages": [
         {
           "head": "Convergent de-risking incentives",
-          "body": "Both states have independent reasons to diversify supply chains, formalised on the Australian side in Invested: Australia's Southeast Asia Economic Strategy to 2040 and on the Vietnamese side by an explicit China-plus-one positioning."
+          "body": "Both states have independent reasons to diversify supply chains away from concentrated dependence. On the Australian side this is formalised in Invested: Australia's Southeast Asia Economic Strategy to 2040; on the Vietnamese side it underpins an explicit China-plus-one positioning. The motive to build the relationship is structural rather than sentimental, which makes it durable."
         },
         {
           "head": "Sectoral fit in critical minerals",
-          "body": "Vietnam's 2024 Law on Geology and Minerals, effective 1 July 2025, shifts the framework from licensing toward resource life-cycle planning, and coincides with Australia's Critical Minerals Strategy 2023–2030 and its A$4bn of commitments."
+          "body": "Vietnam's 2024 Law on Geology and Minerals, adopted in November 2024 and in force from 1 July 2025, replaced the 2010 Mineral Law and moved the regime from licensing toward resource life-cycle planning. It lands alongside Australia's Critical Minerals Strategy 2023–2030 and roughly A$4bn of associated commitments, including a A$2bn facility through Export Finance Australia. The two timetables line up."
         },
         {
-          "head": "Vietnam is moving up the value chain",
-          "body": "High-tech FDI reached US$5.2bn in 2025, up 20%, and Vietnam now hosts more than 170 semiconductor projects with nearly US$11.6bn of registered capital — sectors that match Australian technical and financial capability."
-        },
-        {
-          "head": "The financing scaffolding now exists",
-          "body": "The A$2bn Southeast Asia Investment Financing Facility, an Investment Deal Team hub in Ho Chi Minh City, a Business Champion for Vietnam and a landing pad for technology services were all stood up between 2024 and 2025."
+          "head": "Vietnam's shift toward higher-value FDI",
+          "body": "Capital is moving into semiconductors, data centres, renewable energy and AI — sectors aligned with Australian technical capability rather than with its commodity exports. High-tech FDI inflow reached US$5.2bn in 2025, up 20%, the value of semiconductor projects grew 35% year on year, and Vietnam now hosts more than 170 semiconductor projects carrying close to US$11.6bn of registered capital."
         }
       ],
       "disadvantages": [
         {
-          "head": "Ambition and capital have diverged",
-          "body": "The partnership is comprehensive in declaratory terms and shallow in substance. Australia's investment stock in Vietnam fell 68.5% between 2019 and 2025, from A$2,927m to A$921m. By 2025 Vietnam's stock in Australia (A$1,104m) was the larger of the two."
-        },
-        {
-          "head": "The EEES investment target is moving backwards",
-          "body": "The strategy set out to double two-way investment. Against the A$2.2bn recorded for 2022, doubling implies A$4.4bn; the 2025 outturn of A$2.0bn is 45.3% of target and below the baseline itself."
+          "head": "Asymmetry between political ambition and capital flows",
+          "body": "The partnership is comprehensive in declaratory terms and shallow in investment substance. Australia's entire cumulative registered capital in Vietnam — US$1.9bn across 712 projects, accumulated since 1988 — is smaller than the newly registered capital Singapore committed in 2025 alone. Australia ranked around 20th among investors in Vietnam as at 2020 and still does not appear among the leaders."
         },
         {
           "head": "Competitive crowding",
-          "body": "Australia has concluded parallel critical-minerals arrangements with multiple partners, so Vietnamese access to Australian capital is neither exclusive nor assured."
+          "body": "Australia has concluded parallel critical-minerals arrangements with multiple partners: a framework with the United States reported at around US$8.5bn, an elevated partnership with Japan, a memorandum with the European Union signed in May 2024, and the Quad Critical Minerals Initiative launched in July 2025, on top of the 15-member Minerals Security Partnership. Vietnam is in none of these. Access to Australian capital is neither exclusive nor assured."
         },
         {
           "head": "Regulatory transition costs",
-          "body": "Vietnam's legislative overhaul improves the long-run framework while generating short-run implementation uncertainty. DFAT's own strategy names complicated approval processes as a live obstacle for renewable-energy investors."
-        },
-        {
-          "head": "The data itself is contested",
-          "body": "ABS reports a A$921m Australian stock; Vietnam's ministry reports US$1.9bn of registered capital across 712 projects — about 2.06× the Australian figure. Capital routed through Singapore or Hong Kong is attributed to those economies, so the true exposure is unmeasured rather than merely small."
+          "body": "Vietnam's legislative overhaul improves the long-term framework while generating short-term implementation uncertainty: new decrees, new licensing pathways and untested administrative practice. DFAT's own country strategy names complicated approval processes as a live obstacle for investors, particularly in renewable energy."
         }
       ]
     },
@@ -348,7 +449,7 @@ window.AVDATA = {
         {
           "head": "Make the energy transition the investment vehicle",
           "body": "Vietnam must reconcile 8.0% growth with net zero by 2050 — it cannot on its current energy mix. Australia holds the A$2bn Southeast Asia Investment Financing Facility and A$75m committed to Vietnam's green transition. This is where the investment gap is most closable.",
-          "grounded_in": "Two-way investment stock is A$2.0bn against A$30.0bn of annual trade."
+          "grounded_in": "Australia is absent from Vietnam's leading FDI sources, in a year Vietnam disbursed US$27.62bn."
         },
         {
           "head": "Move into technology, AI and high-tech agriculture",
@@ -372,7 +473,7 @@ window.AVDATA = {
         },
         {
           "head": "Build Australian branch campuses in Vietnam",
-          "body": "A working group already exists to support in-country campuses. This converts a A$2,658m export flow into physical investment on Vietnamese soil — one of the few realistic routes to lifting the investment stock in the short term.",
+          "body": "A working group already exists to support in-country campuses. This converts a A$2,658m export flow into physical investment on Vietnamese soil — one of the few realistic routes to putting Australian capital on the ground in the short term.",
           "grounded_in": "Education-related travel is 19.9% of Australian exports to Vietnam."
         },
         {
@@ -384,10 +485,10 @@ window.AVDATA = {
     }
   },
   "conclusion": [
-    "The Vietnam–Australia economic relationship is strong where it is measured in flows and weak where it is measured in stocks. A$30.0bn of goods and services moved between the two economies in 2025; the entire accumulated investment each holds in the other is A$2.0bn — a ratio of nearly 15 to 1.",
-    "The trade pillar is structurally sound but narrow and carbon-exposed. The investment pillar has gone backwards on the Australian ledger, falling 68.5% since 2019, and by 2025 Vietnam held more capital in Australia than Australia held in Vietnam. The labour pillar is institutionally real but capped at a scale that is symbolic rather than economic.",
-    "None of the three weaknesses is caused by missing architecture. Three free trade agreements, a Comprehensive Strategic Partnership at 96% delivery, a A$2bn financing facility, a deal team, a business champion and a labour arrangement are all in place. The binding constraint is conversion — turning declared ambition and completed action lines into capital that appears in the stock data.",
-    "That makes the period to Vietnam's APEC 2027 host year the real test of the partnership: not whether the two economies can trade more, but whether they can finally invest in each other."
+    "The Vietnam–Australia economic relationship is strong in trade, real in people, and thin in capital. A$30.0bn of goods and services moved between the two economies in 2025. In the same year Vietnam attracted US$27.62bn of realised foreign investment — and Australia was not among the countries supplying it.",
+    "The trade pillar is structurally sound but narrow and carbon-exposed: six line items carry 71.4% of what Australia sells, and the largest of them is coal, in an economy committed to net zero by 2050. The labour pillar is institutionally real but capped at 1,000 workers, a scale that is symbolic rather than economic. Investment is the weakest of the three, and the gap between declared ambition and deployed capital is where the partnership is most exposed.",
+    "None of these weaknesses is caused by missing architecture. Three free trade agreements, a Comprehensive Strategic Partnership at 96% delivery, a A$2bn financing facility, a deal team in Ho Chi Minh City, a business champion and a labour arrangement are all in place. The binding constraint is conversion — turning completed action lines into capital that actually appears in Vietnam's investment register.",
+    "That makes the period to Vietnam's APEC 2027 host year the real test of the partnership: not whether the two economies can trade more, but whether Australia can become a country that builds in Vietnam rather than only sells to it."
   ],
   "factcheck": [
     {
@@ -418,13 +519,13 @@ window.AVDATA = {
       "claim": "Vietnam attracted US$27.62bn in realised FDI in 2025; Australia is not among the leading sources.",
       "status": "ok",
       "finding": "Confirmed — realised FDI was US$27.62bn, up 9%, the highest in five years, against US$38.42bn registered. Singapore led with US$4.84bn, 27.9% of newly registered capital.",
-      "recommendation": "Strong point. Pair it with the A$921m ABS stock figure for maximum effect."
+      "recommendation": "Strong point, and now the spine of the investment section. Pair it with Australia's US$1.9bn cumulative registered capital across 712 projects — less than Singapore registered in 2025 alone."
     },
     {
       "claim": "Roughly 30% of realised FDI in 2025 flowed to semiconductors, data centres, renewable energy and AI.",
       "status": "unverified",
-      "finding": "Could not be substantiated. Reported high-tech FDI inflow for 2025 is US$5.2bn, up 20% — about 19% of realised FDI (US$27.62bn) or 13.5% of registered (US$38.42bn). The 30% figure may use a different sector definition, but no source was found for it.",
-      "recommendation": "Replace with the verifiable version: 'high-tech FDI reached US$5.2bn in 2025, up 20%, with more than 170 semiconductor projects carrying nearly US$11.6bn of registered capital.'"
+      "finding": "Searched again and still could not substantiate it. The verifiable figures are: high-tech FDI inflow of US$5.2bn in 2025, up 20% — about 19% of realised FDI (US$27.62bn) or 13.5% of registered capital (US$38.42bn) — plus 35% year-on-year growth in the value of semiconductor projects and 170+ semiconductor projects carrying about US$11.6bn of registered capital. A 30% share may come from a broader sector definition, but no published source for it was found.",
+      "recommendation": "The site now makes this point using the sourced numbers instead of the 30% figure, so the argument stands unchanged and is defensible. If the 30% comes from a source your group holds, cite it directly on the slide; otherwise use the figures above."
     },
     {
       "claim": "Three RBA rate hikes in early 2026; growth moderating.",
@@ -894,7 +995,7 @@ window.AVDATA = {
       "anchor": "A Memorandum of Understanding on Cooperation in the Digital Economy sits under the Comprehensive Strategic Partnership.",
       "why": "Services are where the investment relationship is thinnest and the margins are highest. A landing pad in Ho Chi Minh City exists to push Australian technology-services exports into the region.",
       "opportunity": "Named growth areas include fintech and digital banking, electronic payments, online education, healthcare and telecommunications — plus professional, financial and logistics services.",
-      "risk": "None of this shows up in the A$921m ABS stock yet. This is the pipeline, not the record.",
+      "risk": "None of this yet shows up in Vietnam's investment register. This is the pipeline, not the record.",
       "sources": [
         "brief",
         "csp",
