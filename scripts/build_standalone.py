@@ -33,7 +33,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DIST = ROOT / "dist"
 
-FONT_WEIGHTS = (400, 500, 600, 700)
+# Google serves these as variable fonts, so one file covers the whole weight
+# axis — declaring a range rather than a fixed weight avoids shipping the same
+# bytes three times.
+FONTS = [
+    ("playfair-var.woff2",        "Playfair Display", "normal", "400 900"),
+    ("playfair-var-italic.woff2", "Playfair Display", "italic", "400 900"),
+    ("sourcesans-var.woff2",      "Source Sans 3",    "normal", "200 900"),
+]
 
 
 def read(path: Path) -> str:
@@ -49,16 +56,17 @@ def data_uri(path: Path) -> str:
 
 
 def font_face_css() -> str:
-    """Inline Poppins so the page keeps the presentation deck's typeface."""
+    """Inline the two typefaces — the CSP blocks font CDNs, and a linked
+    webfont would silently fall back to a system serif."""
     blocks = []
-    for weight in FONT_WEIGHTS:
-        f = ROOT / "assets" / "fonts" / f"poppins-{weight}.woff2"
+    for filename, family, style, weight in FONTS:
+        f = ROOT / "assets" / "fonts" / filename
         if not f.exists():
             print(f"  !!  missing {f.name} — run the font download step first", file=sys.stderr)
             return ""
         b64 = base64.b64encode(f.read_bytes()).decode("ascii")
         blocks.append(
-            "@font-face{font-family:'Poppins';font-style:normal;"
+            f"@font-face{{font-family:'{family}';font-style:{style};"
             f"font-weight:{weight};font-display:swap;"
             f"src:url(data:font/woff2;base64,{b64}) format('woff2');}}"
         )
@@ -122,7 +130,7 @@ def build() -> tuple[str, str]:
     body = re.sub(r'\s*<link rel="icon" href="[^"]*"\s*/?>', "", body)
     body = re.sub(r'\s*<meta (?:charset|name="viewport")[^>]*>', "", body)
 
-    print(f"  ok  inlined {len(used)} images, {len(FONT_WEIGHTS)} font weights")
+    print(f"  ok  inlined {len(used)} images, {len(FONTS)} font files")
     return html, body.strip()
 
 
