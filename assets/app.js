@@ -538,8 +538,6 @@
       host.appendChild(n);
     });
 
-    var lr = byId('ledgerRatio');
-    if (lr) lr.textContent = D.derived.ledger_ratio + '×';
   }
 
   function score() {
