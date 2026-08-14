@@ -2,7 +2,8 @@
   {
     "slug": "flag-vietnam",
     "file": "flag-vietnam.svg",
-    "role": "Flag of Vietnam",
+    "role": "Masthead",
+    "subject": "Flag of Vietnam",
     "title": "File:Flag of Vietnam.svg",
     "licence": "Public domain",
     "licence_code": "pd",
@@ -13,7 +14,8 @@
   {
     "slug": "flag-australia",
     "file": "flag-australia.svg",
-    "role": "Flag of Australia",
+    "role": "Masthead",
+    "subject": "Flag of Australia",
     "title": "File:Flag of Australia.svg",
     "licence": "Public domain",
     "licence_code": "pd",
@@ -22,20 +24,10 @@
     "page": "https://commons.wikimedia.org/wiki/File%3AFlag_of_Australia.svg"
   },
   {
-    "slug": "meeting-fm-2024",
-    "file": "meeting-fm-2024.jpg",
-    "role": "Hero — the bilateral relationship",
-    "title": "File:Australia-Vietnam Foreign Minister's Meeting - 2024 - 000172763.jpg",
-    "licence": "CC BY 4.0",
-    "licence_code": "cc-by-4.0",
-    "author": "Sarah Hodges / DFAT",
-    "description": "Senator the Hon Penny Wong, Minister for Foreign Affairs, hosts Deputy Prime Minister and Minister of Foreign Affairs of Vietnam, His Excellency Bui Thanh Son, at the sixth annual Australia-Vietnam Foreign Ministers’ Meeting to advance cooperation under our Comprehensive Strategic Partnership and address key regional challenges in Adelaide on Friday 18 October 2024.",
-    "page": "https://commons.wikimedia.org/wiki/File%3AAustralia-Vietnam_Foreign_Minister%27s_Meeting_-_2024_-_000172763.jpg"
-  },
-  {
     "slug": "meeting-fm-2024-b",
     "file": "meeting-fm-2024-b.jpg",
-    "role": "Introduction — diplomatic engagement",
+    "role": "Landscape section",
+    "subject": "Australia–Vietnam Foreign Ministers' Meeting, 2024",
     "title": "File:Australia-Vietnam Foreign Minister's Meeting - 2024 - 000172786.jpg",
     "licence": "CC BY 4.0",
     "licence_code": "cc-by-4.0",
@@ -46,7 +38,8 @@
   {
     "slug": "asean-summit-2024",
     "file": "asean-summit-2024.jpg",
-    "role": "Discussion — the summit that launched the A$2bn facility",
+    "role": "Hero",
+    "subject": "ASEAN–Australia Special Summit, Melbourne, 2024",
     "title": "File:ASEAN-Australia Summit 2024.jpg",
     "licence": "Public domain",
     "licence_code": "pd",
@@ -57,7 +50,8 @@
   {
     "slug": "port-haiphong",
     "file": "port-haiphong.jpg",
-    "role": "Trade pillar — Vietnamese container throughput",
+    "role": "Trade section",
+    "subject": "Hai Phong International Container Terminal",
     "title": "File:Container Ship at the Hai Phong International Container Terminal 01.jpg",
     "licence": "CC BY-SA 4.0",
     "licence_code": "cc-by-sa-4.0",
@@ -68,7 +62,8 @@
   {
     "slug": "rmit-vietnam",
     "file": "rmit-vietnam.jpg",
-    "role": "People & labour pillar — Australian education in Vietnam",
+    "role": "People section",
+    "subject": "RMIT University Vietnam",
     "title": "File:RMIT University Vietnam - Campus.JPG",
     "licence": "CC BY-SA 3.0",
     "licence_code": "cc-by-sa-3.0",

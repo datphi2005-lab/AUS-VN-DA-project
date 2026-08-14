@@ -73,7 +73,6 @@ a { color: inherit; }
 .flow > * + * { margin-top: 1.15rem; }
 
 .rule { border: 0; border-top: 1px solid var(--rule); margin: 3.5rem auto; width: min(var(--measure), 100% - 2.5rem); }
-.rule--tight { margin: 2.25rem auto; }
 
 /* ------------------------------------------------------------------ header */
 
@@ -175,7 +174,6 @@ a { color: inherit; }
   color: var(--aus); margin-bottom: .85rem;
 }
 .kicker--vnm { color: var(--vnm); }
-.kicker--ink { color: var(--ink-3); }
 
 .headline { font-size: clamp(1.75rem, 3.6vw, 2.6rem); letter-spacing: -.01em; margin-bottom: 1rem; }
 .subhead  { font-size: var(--step-2); margin: 2.5rem 0 .85rem; }
@@ -202,7 +200,6 @@ a { color: inherit; }
   font-size: clamp(3.25rem, 9vw, 5.5rem); line-height: 1; letter-spacing: -.03em;
   font-variant-numeric: tabular-nums;
 }
-.pull__fig--aus { color: var(--aus); }
 .pull__fig--vnm { color: var(--vnm); }
 .pull__cap { margin-top: .75rem; font-size: .95rem; color: var(--ink-2); max-width: 46ch; margin-inline: auto; }
 
@@ -248,7 +245,6 @@ a { color: inherit; }
 .gridline { stroke: var(--grid); stroke-width: 1; }
 .axisline { stroke: var(--ink-3); stroke-width: 1; }
 .annot { font-size: 12.5px; fill: var(--ink-2); }
-.annot--b { font-weight: 700; fill: var(--ink); }
 
 .mark { transition: opacity .12s; }
 .fig.is-hover .mark { opacity: .35; }
@@ -374,24 +370,15 @@ table.data td.num { font-variant-numeric: tabular-nums; }
 
 /* ------------------------------------------------------------------ sources */
 
-.srcs { display: grid; gap: .7rem; margin-top: 1.25rem; }
-.src { display: grid; grid-template-columns: 1.6rem 1fr; gap: .5rem; font-size: .82rem; line-height: 1.5; }
-.src__n { color: var(--ink-3); font-variant-numeric: tabular-nums; font-weight: 700; font-size: .75rem; padding-top: .12rem; }
-.src a { color: var(--aus); text-decoration: none; overflow-wrap: anywhere; }
-.src a:hover { text-decoration: underline; }
-.src__p { color: var(--ink-2); }
-
 .caveats { display: grid; gap: .9rem; margin-top: 1.25rem; }
 .caveat { font-size: .87rem; color: var(--ink-2); line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--rule); }
 .caveat b { color: var(--ink); font-weight: 700; }
 
-.credits { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1.1rem; margin-top: 1.25rem; }
-.credit { font-size: .78rem; line-height: 1.5; color: var(--ink-2); }
-.credit b { display: block; color: var(--ink); }
-.credit a { color: var(--aus); text-decoration: none; }
-
 .foot { border-top: 2px solid var(--rule-dark); margin-top: 4rem; padding: 2.25rem 0 4rem; font-size: .8rem; color: var(--ink-3); line-height: 1.6; }
 .foot strong { color: var(--ink); }
+.foot__img { margin-top: .8rem; font-size: .74rem; color: var(--ink-3); line-height: 1.55; }
+.foot__img a { color: var(--ink-2); text-decoration: none; }
+.foot__img a:hover { text-decoration: underline; }
 
 :where(a, button, [tabindex]):focus-visible { outline: 2px solid var(--aus); outline-offset: 2px; }
 

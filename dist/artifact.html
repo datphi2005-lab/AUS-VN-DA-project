@@ -79,7 +79,6 @@ a { color: inherit; }
 .flow > * + * { margin-top: 1.15rem; }
 
 .rule { border: 0; border-top: 1px solid var(--rule); margin: 3.5rem auto; width: min(var(--measure), 100% - 2.5rem); }
-.rule--tight { margin: 2.25rem auto; }
 
 /* ------------------------------------------------------------------ header */
 
@@ -181,7 +180,6 @@ a { color: inherit; }
   color: var(--aus); margin-bottom: .85rem;
 }
 .kicker--vnm { color: var(--vnm); }
-.kicker--ink { color: var(--ink-3); }
 
 .headline { font-size: clamp(1.75rem, 3.6vw, 2.6rem); letter-spacing: -.01em; margin-bottom: 1rem; }
 .subhead  { font-size: var(--step-2); margin: 2.5rem 0 .85rem; }
@@ -208,7 +206,6 @@ a { color: inherit; }
   font-size: clamp(3.25rem, 9vw, 5.5rem); line-height: 1; letter-spacing: -.03em;
   font-variant-numeric: tabular-nums;
 }
-.pull__fig--aus { color: var(--aus); }
 .pull__fig--vnm { color: var(--vnm); }
 .pull__cap { margin-top: .75rem; font-size: .95rem; color: var(--ink-2); max-width: 46ch; margin-inline: auto; }
 
@@ -254,7 +251,6 @@ a { color: inherit; }
 .gridline { stroke: var(--grid); stroke-width: 1; }
 .axisline { stroke: var(--ink-3); stroke-width: 1; }
 .annot { font-size: 12.5px; fill: var(--ink-2); }
-.annot--b { font-weight: 700; fill: var(--ink); }
 
 .mark { transition: opacity .12s; }
 .fig.is-hover .mark { opacity: .35; }
@@ -380,24 +376,15 @@ table.data td.num { font-variant-numeric: tabular-nums; }
 
 /* ------------------------------------------------------------------ sources */
 
-.srcs { display: grid; gap: .7rem; margin-top: 1.25rem; }
-.src { display: grid; grid-template-columns: 1.6rem 1fr; gap: .5rem; font-size: .82rem; line-height: 1.5; }
-.src__n { color: var(--ink-3); font-variant-numeric: tabular-nums; font-weight: 700; font-size: .75rem; padding-top: .12rem; }
-.src a { color: var(--aus); text-decoration: none; overflow-wrap: anywhere; }
-.src a:hover { text-decoration: underline; }
-.src__p { color: var(--ink-2); }
-
 .caveats { display: grid; gap: .9rem; margin-top: 1.25rem; }
 .caveat { font-size: .87rem; color: var(--ink-2); line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--rule); }
 .caveat b { color: var(--ink); font-weight: 700; }
 
-.credits { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1.1rem; margin-top: 1.25rem; }
-.credit { font-size: .78rem; line-height: 1.5; color: var(--ink-2); }
-.credit b { display: block; color: var(--ink); }
-.credit a { color: var(--aus); text-decoration: none; }
-
 .foot { border-top: 2px solid var(--rule-dark); margin-top: 4rem; padding: 2.25rem 0 4rem; font-size: .8rem; color: var(--ink-3); line-height: 1.6; }
 .foot strong { color: var(--ink); }
+.foot__img { margin-top: .8rem; font-size: .74rem; color: var(--ink-3); line-height: 1.55; }
+.foot__img a { color: var(--ink-2); text-decoration: none; }
+.foot__img a:hover { text-decoration: underline; }
 
 :where(a, button, [tabindex]):focus-visible { outline: 2px solid var(--aus); outline-offset: 2px; }
 
@@ -423,7 +410,6 @@ table.data td.num { font-variant-numeric: tabular-nums; }
       <a href="#investment">Investment</a>
       <a href="#people">People</a>
       <a href="#what-next">What next</a>
-      <a href="#method">Method</a>
     </nav>
   </div>
 </header>
@@ -451,8 +437,6 @@ table.data td.num { font-variant-numeric: tabular-nums; }
       <span>11 August 2026</span>
     </div>
   </div>
-
-  <p class="hero__credit">ASEAN–Australia Special Summit, Melbourne, March 2024 · Government of Indonesia · Public domain</p>
 
   <div class="hero__scroll" aria-hidden="true">Scroll<span></span></div>
 </section>
@@ -562,7 +546,6 @@ table.data td.num { font-variant-numeric: tabular-nums; }
         The sixth annual Australia–Vietnam Foreign Ministers' Meeting. The diplomatic machinery is the
         part of this relationship that works: 96% of the 180 action lines under the 2024–2027 Action
         Programme are reported complete.
-        <cite data-credit="meeting-fm-2024-b"></cite>
       </figcaption>
     </figure>
   </div>
@@ -639,7 +622,6 @@ table.data td.num { font-variant-numeric: tabular-nums; }
         Hai Phong International Container Terminal, northern Vietnam's largest deep-water container
         port. Australia's coal, iron ore, aluminium, wheat and cotton arrive at terminals like this;
         the telecom equipment, computers and footwear leave from them.
-        <cite data-credit="port-haiphong"></cite>
       </figcaption>
     </figure>
   </div>
@@ -741,7 +723,6 @@ table.data td.num { font-variant-numeric: tabular-nums; }
       <figcaption>
         RMIT University Vietnam. Education-related travel is A$2,658m — Australia's second-largest
         export line to Vietnam, and the only large one insulated from the commodity cycle.
-        <cite data-credit="rmit-vietnam"></cite>
       </figcaption>
     </figure>
   </div>
@@ -819,48 +800,6 @@ table.data td.num { font-variant-numeric: tabular-nums; }
   </div>
 </section>
 
-<hr class="rule">
-
-<!-- ============================================================== METHOD -->
-<section class="section" id="method">
-  <div class="col">
-    <p class="kicker kicker--ink">Method</p>
-    <h2 class="headline">Where every number came from</h2>
-    <div class="body flow">
-      <p>
-        Every figure here is either read directly from a cited public source or computed from those
-        figures by <code>scripts/build_data.py</code>, which runs consistency checks before the page
-        is built. No value is estimated or illustrative.
-      </p>
-    </div>
-
-    <h3 class="subhead">Reading the data critically</h3>
-    <div class="caveats">
-      <p class="caveat"><b>Benchmark years, not a continuous series.</b> The investment chart has four observations. Connecting lines are for readability; the path between points was not observed.</p>
-      <p class="caveat"><b>Registration data is lumpy.</b> A single large project can move a country's annual ranking, so one year's league table is a snapshot rather than a trend. Australia's absence matters because it is persistent, not because of any one year.</p>
-      <p class="caveat"><b>Top-six lists are not totals.</b> DFAT publishes only the six largest items per direction — covering 71.4% of Australian exports but 53.3% of imports, so the two directions are not equally well described.</p>
-      <p class="caveat"><b>Two currencies, two concepts.</b> Australian figures are A$, goods and services; Vietnamese figures are US$, merchandise only. This page never adds one to the other.</p>
-      <p class="caveat"><b>2026 items are contemporaneous reporting</b>, not audited statistics, and are kept separate from the 2025 statistical base.</p>
-      <p class="caveat"><b>Flows, not stocks.</b> This analysis measures investment as FDI flows and registered capital, which is how both governments discuss it. A separate ABS balance-of-payments series measures the bilateral investment <em>stock</em> — what is currently owned, net — and puts two-way investment at A$2.0bn in 2025. That series is in the project's dataset and tells a compatible story, but it answers a different question and is not the basis for anything argued here.</p>
-    </div>
-
-    <h3 class="subhead">Images, flags and insignia</h3>
-    <div class="body flow">
-      <p style="font-size:.9rem;color:var(--ink-2)">
-        Photographs are official or Creative Commons licensed and attributed individually.
-        This page deliberately does not display the Commonwealth Coat of Arms or the National Emblem
-        of Viet Nam: both are protected state insignia whose use implies official endorsement, and
-        this analysis criticises both governments' economic policy. National flags carry no such
-        restriction.
-      </p>
-    </div>
-    <div class="credits" id="credits"></div>
-
-    <h3 class="subhead">Sources</h3>
-    <div class="srcs" id="sources"></div>
-  </div>
-</section>
-
 </main>
 
 <footer class="foot">
@@ -876,6 +815,7 @@ table.data td.num { font-variant-numeric: tabular-nums; }
       educational analysis; all rights in the underlying data remain with their publishers. Analysis
       and interpretation are the authors' own and are not endorsed by any government agency.
     </p>
+    <p class="foot__img" id="imageCredits"></p>
   </div>
 </footer>
 
@@ -2058,7 +1998,8 @@ window.AVDATA = {
     {
       "slug": "flag-vietnam",
       "file": "flag-vietnam.svg",
-      "role": "Flag of Vietnam",
+      "role": "Masthead",
+      "subject": "Flag of Vietnam",
       "title": "File:Flag of Vietnam.svg",
       "licence": "Public domain",
       "licence_code": "pd",
@@ -2069,7 +2010,8 @@ window.AVDATA = {
     {
       "slug": "flag-australia",
       "file": "flag-australia.svg",
-      "role": "Flag of Australia",
+      "role": "Masthead",
+      "subject": "Flag of Australia",
       "title": "File:Flag of Australia.svg",
       "licence": "Public domain",
       "licence_code": "pd",
@@ -2078,20 +2020,10 @@ window.AVDATA = {
       "page": "https://commons.wikimedia.org/wiki/File%3AFlag_of_Australia.svg"
     },
     {
-      "slug": "meeting-fm-2024",
-      "file": "meeting-fm-2024.jpg",
-      "role": "Hero — the bilateral relationship",
-      "title": "File:Australia-Vietnam Foreign Minister's Meeting - 2024 - 000172763.jpg",
-      "licence": "CC BY 4.0",
-      "licence_code": "cc-by-4.0",
-      "author": "Sarah Hodges / DFAT",
-      "description": "Senator the Hon Penny Wong, Minister for Foreign Affairs, hosts Deputy Prime Minister and Minister of Foreign Affairs of Vietnam, His Excellency Bui Thanh Son, at the sixth annual Australia-Vietnam Foreign Ministers’ Meeting to advance cooperation under our Comprehensive Strategic Partnership and address key regional challenges in Adelaide on Friday 18 October 2024.",
-      "page": "https://commons.wikimedia.org/wiki/File%3AAustralia-Vietnam_Foreign_Minister%27s_Meeting_-_2024_-_000172763.jpg"
-    },
-    {
       "slug": "meeting-fm-2024-b",
       "file": "meeting-fm-2024-b.jpg",
-      "role": "Introduction — diplomatic engagement",
+      "role": "Landscape section",
+      "subject": "Australia–Vietnam Foreign Ministers' Meeting, 2024",
       "title": "File:Australia-Vietnam Foreign Minister's Meeting - 2024 - 000172786.jpg",
       "licence": "CC BY 4.0",
       "licence_code": "cc-by-4.0",
@@ -2102,7 +2034,8 @@ window.AVDATA = {
     {
       "slug": "asean-summit-2024",
       "file": "asean-summit-2024.jpg",
-      "role": "Discussion — the summit that launched the A$2bn facility",
+      "role": "Hero",
+      "subject": "ASEAN–Australia Special Summit, Melbourne, 2024",
       "title": "File:ASEAN-Australia Summit 2024.jpg",
       "licence": "Public domain",
       "licence_code": "pd",
@@ -2113,7 +2046,8 @@ window.AVDATA = {
     {
       "slug": "port-haiphong",
       "file": "port-haiphong.jpg",
-      "role": "Trade pillar — Vietnamese container throughput",
+      "role": "Trade section",
+      "subject": "Hai Phong International Container Terminal",
       "title": "File:Container Ship at the Hai Phong International Container Terminal 01.jpg",
       "licence": "CC BY-SA 4.0",
       "licence_code": "cc-by-sa-4.0",
@@ -2124,7 +2058,8 @@ window.AVDATA = {
     {
       "slug": "rmit-vietnam",
       "file": "rmit-vietnam.jpg",
-      "role": "People & labour pillar — Australian education in Vietnam",
+      "role": "People section",
+      "subject": "RMIT University Vietnam",
       "title": "File:RMIT University Vietnam - Campus.JPG",
       "licence": "CC BY-SA 3.0",
       "licence_code": "cc-by-sa-3.0",
@@ -2153,7 +2088,6 @@ window.AVDATA = {
   var D = window.AVDATA;
   if (!D) return;
 
-  var SRC = D.meta.sources;
   var NS = 'http://www.w3.org/2000/svg';
 
   var AUS = '#004F9F', VNM = '#DA251D', NEU = '#C9CDD2', NEU_DK = '#848C96';
@@ -2770,46 +2704,28 @@ window.AVDATA = {
     'cc-by-sa-3.0': 'https://creativecommons.org/licenses/by-sa/3.0/'
   };
 
+  /* The CC BY and CC BY-SA images are licensed on condition of attribution, so
+     this is a requirement rather than decoration. It is consolidated into one
+     footer line — attribution "in any reasonable manner for the medium" — which
+     keeps the figures clean without dropping the credit. */
   function credits() {
+    var host = byId('imageCredits');
     var list = D.credits || [];
-    if (!list.length) return;
-    var bySlug = {};
-    list.forEach(function (c) { bySlug[c.slug] = c; });
+    if (!host || !list.length) return;
 
-    [].forEach.call(document.querySelectorAll('[data-credit]'), function (n) {
-      var c = bySlug[n.getAttribute('data-credit')];
-      if (!c) return;
-      var href = LIC[c.licence_code];
-      n.innerHTML = (c.author ? c.author + ' · ' : '') +
-        (href ? '<a href="' + href + '" target="_blank" rel="noopener noreferrer">' + c.licence + '</a>' : c.licence) +
-        ' · <a href="' + c.page + '" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>';
+    var photos = list.filter(function (c) { return /\.jpe?g$/i.test(c.file); });
+    if (!photos.length) return;
+
+    var parts = photos.map(function (c) {
+      var lic = LIC[c.licence_code]
+        ? '<a href="' + LIC[c.licence_code] + '" target="_blank" rel="noopener noreferrer">' + c.licence + '</a>'
+        : c.licence;
+      return '<a href="' + c.page + '" target="_blank" rel="noopener noreferrer">' +
+             c.subject + '</a> — ' + (c.author || 'unattributed') + ', ' + lic;
     });
 
-    var host = byId('credits');
-    if (!host) return;
-    list.forEach(function (c) {
-      var n = el('div', 'credit');
-      n.innerHTML = '<b>' + c.file + '</b>' + (c.author ? c.author + '<br>' : '') + c.licence +
-        '<br><a href="' + c.page + '" target="_blank" rel="noopener noreferrer">Source</a>';
-      host.appendChild(n);
-    });
-  }
-
-  function sources() {
-    var host = byId('sources');
-    var i = 1;
-    Object.keys(SRC).forEach(function (k) {
-      var s = SRC[k];
-      var row = el('div', 'src');
-      row.appendChild(el('div', 'src__n', String(i++)));
-      var b = el('div');
-      var a = el('a', null, s.label);
-      a.href = s.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
-      b.appendChild(a);
-      b.appendChild(el('div', 'src__p', s.publisher));
-      row.appendChild(b);
-      host.appendChild(row);
-    });
+    host.innerHTML = '<strong>Images:</strong> ' + parts.join(' &middot; ') +
+                     '. Via Wikimedia Commons.';
   }
 
   function inlineFigures() {
@@ -2861,7 +2777,6 @@ window.AVDATA = {
   safe('timeline', timeline);
   safe('conclusion', conclusion);
   safe('credits', credits);
-  safe('sources', sources);
   safe('inlineFigures', inlineFigures);
   safe('controls', controls);
 

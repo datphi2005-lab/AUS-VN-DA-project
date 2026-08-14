@@ -16,7 +16,6 @@
   var D = window.AVDATA;
   if (!D) return;
 
-  var SRC = D.meta.sources;
   var NS = 'http://www.w3.org/2000/svg';
 
   var AUS = '#004F9F', VNM = '#DA251D', NEU = '#C9CDD2', NEU_DK = '#848C96';
@@ -633,46 +632,28 @@
     'cc-by-sa-3.0': 'https://creativecommons.org/licenses/by-sa/3.0/'
   };
 
+  /* The CC BY and CC BY-SA images are licensed on condition of attribution, so
+     this is a requirement rather than decoration. It is consolidated into one
+     footer line — attribution "in any reasonable manner for the medium" — which
+     keeps the figures clean without dropping the credit. */
   function credits() {
+    var host = byId('imageCredits');
     var list = D.credits || [];
-    if (!list.length) return;
-    var bySlug = {};
-    list.forEach(function (c) { bySlug[c.slug] = c; });
+    if (!host || !list.length) return;
 
-    [].forEach.call(document.querySelectorAll('[data-credit]'), function (n) {
-      var c = bySlug[n.getAttribute('data-credit')];
-      if (!c) return;
-      var href = LIC[c.licence_code];
-      n.innerHTML = (c.author ? c.author + ' · ' : '') +
-        (href ? '<a href="' + href + '" target="_blank" rel="noopener noreferrer">' + c.licence + '</a>' : c.licence) +
-        ' · <a href="' + c.page + '" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>';
+    var photos = list.filter(function (c) { return /\.jpe?g$/i.test(c.file); });
+    if (!photos.length) return;
+
+    var parts = photos.map(function (c) {
+      var lic = LIC[c.licence_code]
+        ? '<a href="' + LIC[c.licence_code] + '" target="_blank" rel="noopener noreferrer">' + c.licence + '</a>'
+        : c.licence;
+      return '<a href="' + c.page + '" target="_blank" rel="noopener noreferrer">' +
+             c.subject + '</a> — ' + (c.author || 'unattributed') + ', ' + lic;
     });
 
-    var host = byId('credits');
-    if (!host) return;
-    list.forEach(function (c) {
-      var n = el('div', 'credit');
-      n.innerHTML = '<b>' + c.file + '</b>' + (c.author ? c.author + '<br>' : '') + c.licence +
-        '<br><a href="' + c.page + '" target="_blank" rel="noopener noreferrer">Source</a>';
-      host.appendChild(n);
-    });
-  }
-
-  function sources() {
-    var host = byId('sources');
-    var i = 1;
-    Object.keys(SRC).forEach(function (k) {
-      var s = SRC[k];
-      var row = el('div', 'src');
-      row.appendChild(el('div', 'src__n', String(i++)));
-      var b = el('div');
-      var a = el('a', null, s.label);
-      a.href = s.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
-      b.appendChild(a);
-      b.appendChild(el('div', 'src__p', s.publisher));
-      row.appendChild(b);
-      host.appendChild(row);
-    });
+    host.innerHTML = '<strong>Images:</strong> ' + parts.join(' &middot; ') +
+                     '. Via Wikimedia Commons.';
   }
 
   function inlineFigures() {
@@ -724,7 +705,6 @@
   safe('timeline', timeline);
   safe('conclusion', conclusion);
   safe('credits', credits);
-  safe('sources', sources);
   safe('inlineFigures', inlineFigures);
   safe('controls', controls);
 

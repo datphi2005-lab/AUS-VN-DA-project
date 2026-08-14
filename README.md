@@ -78,18 +78,19 @@ Commons, not redrawn. That matters for the Australian flag in particular: the Un
 counterchanged St Patrick saltire, the seven-pointed Commonwealth Star and the five stars of the
 Southern Cross are all geometrically correct rather than approximated.
 
-**Photographs.** All four are official or Creative Commons licensed, downloaded and credited by
+**Photographs.** All are official or Creative Commons licensed, downloaded and credited by
 `scripts/fetch_media.py`, which refuses any file whose licence is not on its allow-list:
 
 | Photo | Author | Licence |
 |---|---|---|
-| Wong & Bui Thanh Son, Foreign Ministers' Meeting 2024 (×2) | Sarah Hodges / DFAT | CC BY 4.0 |
+| Australia–Vietnam Foreign Ministers' Meeting, 2024 | Sarah Hodges / DFAT | CC BY 4.0 |
 | ASEAN–Australia Special Summit, Melbourne 2024 | Government of Indonesia | Public domain |
 | Hai Phong International Container Terminal | Nathan.cima | CC BY-SA 4.0 |
 | RMIT University Vietnam campus | Prenn | CC BY-SA 3.0 |
 
-Attribution appears beside each image on the page and in `assets/img/CREDITS.md`, both generated from
-the licence metadata rather than typed by hand.
+Attribution appears as a single credit line in the site footer and in `assets/img/CREDITS.md`, both
+generated from the licence metadata rather than typed by hand. The CC BY and CC BY-SA images are
+licensed on condition of attribution, so that footer line is a requirement — do not remove it.
 
 **On national emblems.** The site deliberately does *not* display the Commonwealth Coat of Arms or
 the National Emblem of Viet Nam. These are protected state insignia, not ordinary logos — the
@@ -131,7 +132,8 @@ published DFAT line items.
 
 ## Sources
 
-All 21 sources are listed with links in the site's *Method & sources* section. The primary ones:
+Sources are cited inline beneath every figure on the page, and the full list with URLs lives in
+`data/dataset.json` under `meta.sources`. The primary ones:
 
 - DFAT, [Vietnam country economic fact sheet](https://www.dfat.gov.au/sites/default/files/viet-cef.pdf) (ABS/IMF data, 2025) — the core dataset
 - DFAT, [Vietnam country brief](https://www.dfat.gov.au/geo/vietnam/vietnam-country-brief)
