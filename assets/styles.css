@@ -188,6 +188,20 @@ a { color: inherit; }
   font-size: 3.7em; line-height: .82; padding: .06em .1em 0 0; color: var(--ink);
 }
 
+/* A conceptual statement rather than a data passage, so it is set in the
+   display serif at reading size — formal, and clearly a change of register from
+   the surrounding sans body copy. */
+.statement {
+  font-family: var(--display);
+  font-size: clamp(1.15rem, 1.7vw, 1.35rem);
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: -.003em;
+  color: var(--ink);
+  margin: 2.25rem 0 .5rem;
+}
+.statement .hl { font-weight: 700; color: var(--aus); }
+
 /* ------------------------------------------------------------- pull number */
 
 .pull {
