@@ -82,7 +82,7 @@ def build() -> tuple[str, str]:
     # 1. Drop the external font + stylesheet links; inline both instead.
     html = re.sub(r'\s*<link rel="preconnect"[^>]*>', "", html)
     html = re.sub(r'\s*<link href="https://fonts\.googleapis\.com[^>]*>', "", html)
-    html = re.sub(r'\s*<link rel="stylesheet" href="assets/styles\.css">', "", html)
+    html = re.sub(r'\s*<link rel="stylesheet" href="assets/styles\.css(?:\?v=[0-9a-f]+)?">', "", html)
 
     inline_style = "<style>\n" + font_face_css() + "\n" + css + "\n</style>"
     html = html.replace("</head>", inline_style + "\n</head>")
@@ -109,7 +109,8 @@ def build() -> tuple[str, str]:
     #    it cannot terminate the tag early.
     scripts = (data_js + "\n" + app_js).replace("</script>", "<\\/script>")
     html = re.sub(
-        r'<script src="assets/data\.js"></script>\s*<script src="assets/app\.js"></script>',
+        r'<script src="assets/data\.js(?:\?v=[0-9a-f]+)?"></script>\s*'
+        r'<script src="assets/app\.js(?:\?v=[0-9a-f]+)?"></script>',
         "<script>\n" + scripts + "\n</script>",
         html,
     )

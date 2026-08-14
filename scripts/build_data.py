@@ -17,7 +17,9 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -253,7 +255,40 @@ def main() -> int:
         fh.write(";\n")
 
     print(f"\nwrote {OUT_JS.relative_to(ROOT)}")
+
+    for line in stamp_assets():
+        print(f"  {line}")
+
     return 0
+
+
+def stamp_assets() -> list[str]:
+    """Append a content hash to the stylesheet and script URLs in index.html.
+
+    GitHub Pages serves assets with a long cache lifetime, so a browser that has
+    already loaded styles.css will keep using its copy after a deploy — the new
+    markup arrives styled by the old stylesheet, which looks like the change
+    simply did not happen. Hashing the URL means a changed file is a new URL and
+    the browser has no stale copy to reuse.
+    """
+    index = ROOT / "index.html"
+    html = index.read_text(encoding="utf-8")
+    notes = []
+
+    for rel in ("assets/styles.css", "assets/app.js", "assets/data.js"):
+        path = ROOT / rel
+        if not path.exists():
+            continue
+        digest = hashlib.md5(path.read_bytes()).hexdigest()[:8]
+        # Match the path with or without an existing ?v= stamp.
+        pattern = re.compile(re.escape(rel) + r'(?:\?v=[0-9a-f]+)?')
+        new_html, count = pattern.subn(f"{rel}?v={digest}", html)
+        if count:
+            html = new_html
+            notes.append(f"ok  stamped {rel} ?v={digest} ({count}×)")
+
+    index.write_text(html, encoding="utf-8")
+    return notes
 
 
 if __name__ == "__main__":
